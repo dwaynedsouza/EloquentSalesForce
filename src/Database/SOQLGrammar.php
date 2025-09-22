@@ -16,7 +16,9 @@ class SOQLGrammar extends Grammar
      public function __construct(Connection $connection = null)
     {
         // If Laravel passes a connection, great. If not, just pass null.
-        parent::__construct($connection);
+        if ($connection) {
+            parent::__construct($connection);
+        }
     }
     protected $model;
 
