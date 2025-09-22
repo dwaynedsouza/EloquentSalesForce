@@ -10,14 +10,18 @@ use Illuminate\Support\Arr;
 use Illuminate\Support\Str;
 use Lester\EloquentSalesForce\Facades\SObjects;
 use Lester\EloquentSalesForce\ServiceProvider;
+use Lester\EloquentSalesForce\Database\SOQLConnection;
+
 
 class SOQLGrammar extends Grammar
 {
-     public function __construct(Connection $connection = null)
+     public function __construct($connection = null)
     {
-        // If Laravel passes a connection, great. If not, just pass null.
+        // Always ensure a connection object exists
         if ($connection) {
             parent::__construct($connection);
+        } else {
+            parent::__construct(new SOQLConnection());
         }
     }
     protected $model;
